@@ -2,7 +2,10 @@ package com.teste.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+<<<<<<< HEAD
 import com.teste.demo.entities.enums.OrderStatus;
+=======
+>>>>>>> 00cd70410f3cc97a1dfbb1a1453d0928b8e0cccc
 import jakarta.persistence.*;
 
 
@@ -24,8 +27,11 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING , pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant moment;
 
+<<<<<<< HEAD
     private Integer orderStatus;
 
+=======
+>>>>>>> 00cd70410f3cc97a1dfbb1a1453d0928b8e0cccc
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
@@ -33,10 +39,16 @@ public class Order implements Serializable {
     public Order() {
     }
 
+<<<<<<< HEAD
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
         setOrderStatus(orderStatus);
+=======
+    public Order(Long id, Instant moment, User client) {
+        this.id = id;
+        this.moment = moment;
+>>>>>>> 00cd70410f3cc97a1dfbb1a1453d0928b8e0cccc
         this.client = client;
     }
 
@@ -60,6 +72,7 @@ public class Order implements Serializable {
     public void setMoment(Instant moment) {
         this.moment = moment;
     }
+<<<<<<< HEAD
 
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
@@ -71,6 +84,8 @@ public class Order implements Serializable {
         }
     }
 
+=======
+>>>>>>> 00cd70410f3cc97a1dfbb1a1453d0928b8e0cccc
     public User getClient() {
         return client;
     }
