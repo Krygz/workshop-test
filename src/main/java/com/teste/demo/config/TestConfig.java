@@ -1,14 +1,8 @@
 package com.teste.demo.config;
 
-import com.teste.demo.entities.Category;
-import com.teste.demo.entities.Order;
-import com.teste.demo.entities.Product;
-import com.teste.demo.entities.User;
+import com.teste.demo.entities.*;
 import com.teste.demo.entities.enums.OrderStatus;
-import com.teste.demo.repository.CategoryRepository;
-import com.teste.demo.repository.OrderRepository;
-import com.teste.demo.repository.ProductRepository;
-import com.teste.demo.repository.UserRepository;
+import com.teste.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -28,11 +22,15 @@ public class TestConfig implements CommandLineRunner {
 private CategoryRepository categoryRepository;
 @Autowired
 private ProductRepository productRepository;
-    @Override
+@Autowired
+private OrderItemRepository orderItemRepository;
+@Override
     public void run(String... args) throws Exception {
 
         User u1 = new User(null,"Jhon Wick","jhon@gmail.com","929848","dogslover");
         User u2 = new User(null,"Bruce Waine","batman@gmail.com","677654","batlover");
+
+        userRepository.saveAll(Arrays.asList(u1,u2));
 
         Order o1 = new Order(null, Instant.parse("2019-07-20T19:53:07Z"), OrderStatus.DELIVERED, u1);
         Order o2 = new Order(null, Instant.parse("2019-02-20T19:33:05Z"),OrderStatus.DELIVERED, u2);
@@ -48,7 +46,7 @@ private ProductRepository productRepository;
         Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
         Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
-        userRepository.saveAll(Arrays.asList(u1,u2));
+
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
         categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
@@ -60,7 +58,12 @@ private ProductRepository productRepository;
         p4.getCategories().add(cat3);
         p5.getCategories().add(cat2);
 
-        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+       orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
     }
 }
