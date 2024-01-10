@@ -81,9 +81,11 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+
     public Set<Category> getCategories() {
         return categories;
     }
+
 
     @JsonIgnore
     public Set<Order> getOrders() {
